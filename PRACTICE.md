@@ -3,7 +3,7 @@
 [![License Apache2](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Discord](https://img.shields.io/discord/685554030159593522)](https://discord.com/widget?id=685554030159593522&theme=dark)
 
-This section will run you through a set of practice exam questions. We will split them into a set from DS201 (Developer), DS220 (Data Modeling), and DS210 (Administrator).
+This section will run you through a set of practice exam questions. We will split them into a set from DS201 (Developer), DS220 (Data Modeling), and DS210 (Administrator). These practice exam questions are also available as a sample exam in the interface used for the *real* certification exams at [https://tests.mettl.com/authenticateKey/2cq9v93x8g](https://tests.mettl.com/authenticateKey/2cq9v93x8g).
 
 [<-- Back to MAIN](./README.md)
 
@@ -16,8 +16,8 @@ This section will run you through a set of practice exam questions. We will spli
 | **[3. CQL](#3-cql---developer-and-administrator-exams)** | Developer and Administrator |
 | **[4. CQL](#4-cql---developer-and-administrator-exams)** | Developer and Administrator |
 | **[5. CQL](#5-cql---developer-and-administrator-exams)** | Developer and Administrator |
-| **[6. CQL](#6-cql---developer-and-administrator-exams)** | Developer and Administrator |
-| **[7. CQL](#7-cql---developer-and-administrator-exams)** | Developer and Administrator |
+| **[6. CQL](#6-cql---developer-exam)** | Developer |
+| **[7. CQL](#7-cql---developer-exam)** | Developer |
 | **[8. CQL](#8-cql---developer-and-administrator-exams)** | Developer and Administrator |
 | **[9. CQL](#9-cql---developer-and-administrator-exams)** | Developer and Administrator |
 | **[10. CQL](#10-cql---developer-and-administrator-exams)** | Developer and Administrator |
@@ -200,7 +200,7 @@ BEGIN BATCH
       VALUES ('AC1123', 'Joe', 'legal');
 APPLY BATCH;
 ```
-What is a valid statement about this atomic batch?
+What is a valid statement about this batch?
 
 **A.** It is a single-partition batch that can be applied.
 
@@ -264,7 +264,7 @@ What primary key does this table have?
 
 [⬆️ Top](#sample-questions)
 
-### 6. CQL - Developer and Administrator Exams
+### 6. CQL - Developer Exam
 Consider the table definition and the CQL query:
 ```
 CREATE TABLE teams (
@@ -321,7 +321,7 @@ CREATE MATERIALIZED VIEW IF NOT EXISTS
 
 [⬆️ Top](#sample-questions)
 
-### 7. CQL - Developer and Administrator Exams
+### 7. CQL - Developer Exam
 Consider the table definition and the CQL query:
 ```
 CREATE TABLE restaurants_by_city (
@@ -453,16 +453,16 @@ CREATE TABLE emails_by_user (
     PRIMARY KEY((username), email)
 );
 
-INSERT INTO people (username, email, description, nickname) 
+INSERT INTO emails_by_user (username, email, description, nickname) 
   VALUES ('dc1234', 'david@datastax.com', 'work', 'Dave');
   
-INSERT INTO people (username, email, description, nickname) 
+INSERT INTO emails_by_user (username, email, description, nickname) 
   VALUES ('dc1234', 'david@gmail.com', 'personal', 'Dave');
   
-UPDATE people SET nickname = 'Davey', description = 'school' 
+UPDATE emails_by_user SET nickname = 'Davey', description = 'school' 
   WHERE username = 'dc1234' AND email = 'david@gmail.com';
   
-SELECT * FROM PEOPLE WHERE username = 'dc1234';  
+SELECT * FROM emails_by_user WHERE username = 'dc1234';  
 ```
 What is the result of executing these CQL statements?
 
@@ -532,7 +532,7 @@ What is a valid statement about a read request made at consistency level of ``LO
 [⬆️ Top](#sample-questions)
 
 ### 12. Architecture - Developer and Administrator Exams
-Consider these CQL traces:
+Consider these CQL traces: (You may need to scroll to see the entire trace.)
 
 ```
  activity                                                                     | timestamp                  | source       | source_elapsed | client
@@ -547,13 +547,13 @@ Consider these CQL traces:
 ```
 At what elapsed time is the data persisted so that it will survive an unexpected node shutdown?
 
-**A.** 690 milliseconds
+**A.** 690 microseconds
  
-**B.** 1834 milliseconds
+**B.** 1834 microseconds
 
-**C.** 2193 milliseconds
+**C.** 2193 microseconds
 
-**D.** 2966 milliseconds
+**D.** 2966 microseconds
 
 <details><summary>Click to view the correct answer</summary>
 <p>
@@ -749,34 +749,34 @@ Consider the Chebotko Diagram that captures the physical data model for investme
 
 ![physical data model](images/investment-physical.png)
 
-What is the primary key and clustering order of the table ``trades_by_a_std``?
+What is the primary key and clustering order of the table ``trades_by_a_sd``?
 
 **A.** 
 ```
-    PRIMARY KEY((account), trade_id, symbol, type)
+    PRIMARY KEY((account), trade_id, symbol)
 )
-WITH CLUSTERING ORDER BY (trade_id DESC, symbol ASC, type ASC);
+WITH CLUSTERING ORDER BY (trade_id DESC, symbol ASC);
 ```
 
 **B.** 
 ```
-    PRIMARY KEY((account), trade_id, symbol, type)
+    PRIMARY KEY((account), trade_id, symbol)
 )
 WITH CLUSTERING ORDER BY (trade_id DESC);
 ```
 
 **C.** 
 ```
-    PRIMARY KEY((account),symbol, type, trade_id)
+    PRIMARY KEY((account), symbol, trade_id)
 )
 WITH CLUSTERING ORDER BY (trade_id DESC);
 ```
 
 **D.** 
 ```
-    PRIMARY KEY((account),symbol, type, trade_id)
+    PRIMARY KEY((account), symbol, trade_id)
 )
-WITH CLUSTERING ORDER BY (symbol ASC, type ASC, trade_id DESC);
+WITH CLUSTERING ORDER BY (symbol ASC, trade_id DESC);
 ```
 
 <details><summary>Click to view the correct answer</summary>
